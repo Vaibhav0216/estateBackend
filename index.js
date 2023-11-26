@@ -1,8 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import textRouter from "./routes/test.routes.js";
-import signupRouter from "./routes/signup.routes.js";
+import signupRouter from "./routes/auth.routes.js";
 dotenv.config({ path: ".env"});
 
 mongoose.connect(process.env.mongoURL)
@@ -15,7 +14,10 @@ mongoose.connect(process.env.mongoURL)
   });
 const app = express(); 
 app.use(express.json());
-app.use("/api/test", textRouter); 
+
+app.get("/", (req, res) => {
+  res.send("Welcome to Estate API");
+});
 app.use("/api/auth", signupRouter); 
 
 app.use((err, req, res, next) => {
