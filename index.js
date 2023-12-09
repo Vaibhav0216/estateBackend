@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
+import bodyParser from "body-parser";
 import signupRouter from "./routes/auth.routes.js";
 dotenv.config({ path: ".env"});
 
@@ -14,7 +16,8 @@ mongoose.connect(process.env.mongoURL)
   });
 const app = express(); 
 app.use(express.json());
-
+app.use(cors());
+app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("Welcome to Estate API");
 });
