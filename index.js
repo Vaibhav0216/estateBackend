@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import signupRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
+import listingRouter from "./routes/listing.routes.js";
 dotenv.config({ path: ".env" });
 
 mongoose
@@ -22,12 +23,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.json());
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { 
   res.send("Welcome to Estate API");
 });
 
 app.use("/api/auth", signupRouter);
 app.use("/api/user", userRouter);
+app.use("/api/listing", listingRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
